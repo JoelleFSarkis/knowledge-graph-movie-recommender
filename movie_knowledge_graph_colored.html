@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 700px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "skyblue", "font": {"color": "black"}, "id": "Movie11", "label": "Movie11", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Mystery", "label": "Mystery", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie3", "label": "Movie3", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "AlejandroInarritu", "label": "AlejandroInarritu", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie7", "label": "Movie7", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Thriller", "label": "Thriller", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie10", "label": "Movie10", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "JohnDavidWashington", "label": "JohnDavidWashington", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie4", "label": "Movie4", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "KateWinslet", "label": "KateWinslet", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Action", "label": "Action", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie9", "label": "Movie9", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "ScienceFiction", "label": "ScienceFiction", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Memento", "label": "Memento", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Tenet", "label": "Tenet", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Movie", "label": "Movie", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie2", "label": "Movie2", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Gravity", "label": "Gravity", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie1", "label": "Movie1", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Romance", "label": "Romance", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie5", "label": "Movie5", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Western", "label": "Western", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "The Revenant", "label": "The Revenant", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "JamieFoxx", "label": "JamieFoxx", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "LeonardoDiCaprio", "label": "LeonardoDiCaprio", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "DjangoUnchained", "label": "DjangoUnchained", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "JamesCameron", "label": "JamesCameron", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Titanic", "label": "Titanic", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie6", "label": "Movie6", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Inception", "label": "Inception", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "MatthewMcConaughey", "label": "MatthewMcConaughey", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "GuyPearce", "label": "GuyPearce", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "ChristopherNolan", "label": "ChristopherNolan", "shape": "dot"}, {"color": "skyblue", "font": {"color": "black"}, "id": "Movie8", "label": "Movie8", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "The Wolf of Wall Street", "label": "The Wolf of Wall Street", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "SandraBullock", "label": "SandraBullock", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "ChristianBale", "label": "ChristianBale", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Interstellar", "label": "Interstellar", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Biography", "label": "Biography", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "QuentinTarantino", "label": "QuentinTarantino", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "JonahHill", "label": "JonahHill", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "HeathLedger", "label": "HeathLedger", "shape": "dot"}, {"color": "lightcoral", "font": {"color": "black"}, "id": "Drama", "label": "Drama", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "MartinScorsese", "label": "MartinScorsese", "shape": "dot"}, {"color": "orange", "font": {"color": "black"}, "id": "AlfonsoCuaron", "label": "AlfonsoCuaron", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "Shutter Island", "label": "Shutter Island", "shape": "dot"}, {"color": "lightgreen", "font": {"color": "black"}, "id": "GeorgeClooney", "label": "GeorgeClooney", "shape": "dot"}, {"color": "lightgray", "font": {"color": "black"}, "id": "TheDarkKnight", "label": "TheDarkKnight", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Movie11", "label": "has_genre", "to": "Mystery"}, {"from": "Movie11", "label": "title", "to": "Memento"}, {"from": "Movie11", "label": "has_actor", "to": "GuyPearce"}, {"from": "Movie11", "label": "directed_by", "to": "ChristopherNolan"}, {"from": "Movie11", "label": "type", "to": "Movie"}, {"from": "Movie3", "label": "directed_by", "to": "AlejandroInarritu"}, {"from": "Movie3", "label": "title", "to": "The Revenant"}, {"from": "Movie3", "label": "has_actor", "to": "LeonardoDiCaprio"}, {"from": "Movie3", "label": "type", "to": "Movie"}, {"from": "Movie3", "label": "has_genre", "to": "Drama"}, {"from": "Movie7", "label": "has_genre", "to": "Thriller"}, {"from": "Movie7", "label": "type", "to": "Movie"}, {"from": "Movie7", "label": "has_actor", "to": "LeonardoDiCaprio"}, {"from": "Movie7", "label": "directed_by", "to": "MartinScorsese"}, {"from": "Movie7", "label": "title", "to": "Shutter Island"}, {"from": "Movie10", "label": "has_actor", "to": "JohnDavidWashington"}, {"from": "Movie10", "label": "has_genre", "to": "Action"}, {"from": "Movie10", "label": "title", "to": "Tenet"}, {"from": "Movie10", "label": "type", "to": "Movie"}, {"from": "Movie10", "label": "directed_by", "to": "ChristopherNolan"}, {"from": "Movie4", "label": "has_actor", "to": "KateWinslet"}, {"from": "Movie4", "label": "has_genre", "to": "Romance"}, {"from": "Movie4", "label": "directed_by", "to": "JamesCameron"}, {"from": "Movie4", "label": "title", "to": "Titanic"}, {"from": "Movie4", "label": "has_actor", "to": "LeonardoDiCaprio"}, {"from": "Movie4", "label": "type", "to": "Movie"}, {"from": "Action", "label": "has_genre", "to": "Movie6"}, {"from": "Movie9", "label": "has_genre", "to": "ScienceFiction"}, {"from": "Movie9", "label": "title", "to": "Gravity"}, {"from": "Movie9", "label": "has_actor", "to": "SandraBullock"}, {"from": "Movie9", "label": "type", "to": "Movie"}, {"from": "Movie9", "label": "directed_by", "to": "AlfonsoCuaron"}, {"from": "Movie9", "label": "has_actor", "to": "GeorgeClooney"}, {"from": "ScienceFiction", "label": "has_genre", "to": "Movie2"}, {"from": "ScienceFiction", "label": "has_genre", "to": "Movie1"}, {"from": "Movie", "label": "type", "to": "Movie6"}, {"from": "Movie", "label": "type", "to": "Movie2"}, {"from": "Movie", "label": "type", "to": "Movie1"}, {"from": "Movie", "label": "type", "to": "Movie8"}, {"from": "Movie", "label": "type", "to": "Movie5"}, {"from": "Movie2", "label": "has_actor", "to": "MatthewMcConaughey"}, {"from": "Movie2", "label": "title", "to": "Interstellar"}, {"from": "Movie2", "label": "directed_by", "to": "ChristopherNolan"}, {"from": "Movie1", "label": "has_actor", "to": "LeonardoDiCaprio"}, {"from": "Movie1", "label": "title", "to": "Inception"}, {"from": "Movie1", "label": "directed_by", "to": "ChristopherNolan"}, {"from": "Movie5", "label": "has_genre", "to": "Western"}, {"from": "Movie5", "label": "has_actor", "to": "JamieFoxx"}, {"from": "Movie5", "label": "title", "to": "DjangoUnchained"}, {"from": "Movie5", "label": "directed_by", "to": "QuentinTarantino"}, {"from": "Movie5", "label": "has_actor", "to": "LeonardoDiCaprio"}, {"from": "LeonardoDiCaprio", "label": "has_actor", "to": "Movie8"}, {"from": "Movie6", "label": "directed_by", "to": "ChristopherNolan"}, {"from": "Movie6", "label": "has_actor", "to": "ChristianBale"}, {"from": "Movie6", "label": "has_actor", "to": "HeathLedger"}, {"from": "Movie6", "label": "title", "to": "TheDarkKnight"}, {"from": "Movie8", "label": "title", "to": "The Wolf of Wall Street"}, {"from": "Movie8", "label": "has_genre", "to": "Biography"}, {"from": "Movie8", "label": "has_actor", "to": "JonahHill"}, {"from": "Movie8", "label": "directed_by", "to": "MartinScorsese"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
