@@ -44,4 +44,5 @@ for node in G.nodes:
 for u, v, d in G.edges(data=True):
     net.add_edge(u, v, label=d["label"])
 
-net.show("movie_knowledge_graph_colored.html")
+net.write_html("movie_knowledge_graph_colored.html", open_browser=True, notebook=False)
+

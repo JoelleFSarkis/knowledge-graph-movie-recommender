@@ -4,30 +4,35 @@ ns1:Movie1 a ns1:Movie ;
     ns1:directed_by ns1:ChristopherNolan ;
     ns1:has_actor ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:ScienceFiction ;
+    ns1:has_date ns1:2010;
     ns1:title "Inception" .
 
 ns1:Movie10 a ns1:Movie ;
     ns1:directed_by ns1:ChristopherNolan ;
     ns1:has_actor ns1:JohnDavidWashington ;
     ns1:has_genre ns1:Action ;
+    ns1:has_date ns1:2011;
     ns1:title "Tenet" .
 
 ns1:Movie11 a ns1:Movie ;
     ns1:directed_by ns1:ChristopherNolan ;
     ns1:has_actor ns1:GuyPearce ;
     ns1:has_genre ns1:Mystery ;
+    ns1:has_date ns1:2013;
     ns1:title "Memento" .
 
 ns1:Movie2 a ns1:Movie ;
     ns1:directed_by ns1:ChristopherNolan ;
     ns1:has_actor ns1:MatthewMcConaughey ;
     ns1:has_genre ns1:ScienceFiction ;
+    ns1:has_date ns1:2015;
     ns1:title "Interstellar" .
 
 ns1:Movie3 a ns1:Movie ;
     ns1:directed_by ns1:AlejandroInarritu ;
     ns1:has_actor ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:Drama ;
+    ns1:has_date ns1:2012;
     ns1:title "The Revenant" .
 
 ns1:Movie4 a ns1:Movie ;
@@ -35,6 +40,7 @@ ns1:Movie4 a ns1:Movie ;
     ns1:has_actor ns1:KateWinslet,
         ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:Romance ;
+    ns1:has_date ns1:2011;
     ns1:title "Titanic" .
 
 ns1:Movie5 a ns1:Movie ;
@@ -42,6 +48,7 @@ ns1:Movie5 a ns1:Movie ;
     ns1:has_actor ns1:JamieFoxx,
         ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:Western ;
+    ns1:has_date ns1:2015;
     ns1:title "DjangoUnchained" .
 
 ns1:Movie6 a ns1:Movie ;
@@ -49,12 +56,14 @@ ns1:Movie6 a ns1:Movie ;
     ns1:has_actor ns1:ChristianBale,
         ns1:HeathLedger ;
     ns1:has_genre ns1:Action ;
+    ns1:has_date ns1:2017;
     ns1:title "TheDarkKnight" .
 
 ns1:Movie7 a ns1:Movie ;
     ns1:directed_by ns1:MartinScorsese ;
     ns1:has_actor ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:Thriller ;
+    ns1:has_date ns1:2010;
     ns1:title "Shutter Island" .
 
 ns1:Movie8 a ns1:Movie ;
@@ -62,12 +71,14 @@ ns1:Movie8 a ns1:Movie ;
     ns1:has_actor ns1:JonahHill,
         ns1:LeonardoDiCaprio ;
     ns1:has_genre ns1:Biography ;
+    ns1:has_date ns1:2010;
     ns1:title "The Wolf of Wall Street" .
 
 ns1:Movie9 a ns1:Movie ;
     ns1:directed_by ns1:AlfonsoCuaron ;
     ns1:has_actor ns1:GeorgeClooney,
         ns1:SandraBullock ;
+        ns1:has_date ns1:2010;
     ns1:has_genre ns1:ScienceFiction ;
     ns1:title "Gravity" .
 
